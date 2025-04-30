@@ -3,7 +3,7 @@ from PIL import Image
 import cv2
 from pprint import pprint
 
-face_detector = SCRFD.from_path("Scrfd/scrfd.onnx")
+face_detector = SCRFD.from_path("scrfd.onnx")
 threshold = Threshold(probability=0.4)
 
 cap = cv2.VideoCapture(0)

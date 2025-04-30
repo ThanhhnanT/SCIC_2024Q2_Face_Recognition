@@ -1,8 +1,7 @@
 import cv2
 import faiss
 import torch
-import torch.nn as nn
-from MultiRegionModel import EnhancedMultiRegionModel
+from BuildModel.MultiRegionModel import EnhancedMultiRegionModel
 from torchvision.transforms import Compose, ToTensor, Resize, Normalize
 from scrfd import SCRFD, Threshold
 from PIL import Image
@@ -16,7 +15,7 @@ threshold = Threshold(probability=0.4)
 print(faiss.__version__)
 
 index = faiss.read_index("face_index.faiss")  # Sử dụng Inner Product cho cosine similarity
-with open("face_labels.pkl", "rb") as f:
+with open("VectorDatabase/face_labels.pkl", "rb") as f:
     name = pickle.load(f)
 # Khởi tạo webcam
 cap = cv2.VideoCapture(0)
@@ -30,7 +29,7 @@ transform = Compose([
 
 # Khởi tạo mô hình và tải checkpoint
 model = EnhancedMultiRegionModel()
-checkpoint = torch.load('save_model/last.pt')
+checkpoint = torch.load('Save_model/last.pt')
 model.load_state_dict(checkpoint['state_dict'])
 print(checkpoint['accuracy'])
 # Chuyển model vào chế độ đánh giá

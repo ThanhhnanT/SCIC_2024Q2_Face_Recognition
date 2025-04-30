@@ -6,12 +6,9 @@ import torch
 from torch.utils.data import DataLoader
 import torch.nn as nn
 from torchvision.transforms import Compose, ToTensor, Resize, Normalize, RandomRotation, ColorJitter
-import cv2
-import numpy as np
-import random
 from tqdm import tqdm
-from torch.optim import Adam, SGD
-from MultiRegionModel import EnhancedMultiRegionModel
+from torch.optim import Adam
+from BuildModel.MultiRegionModel import EnhancedMultiRegionModel
 from argparse import ArgumentParser
 
 def get_arg():
@@ -20,7 +17,7 @@ def get_arg():
     parser.add_argument("--batch_size", '-b', type=int, default=8, help="batch size")
     parser.add_argument("--logging", "-l", type=str, default="tensorboard", help="logging level")
     parser.add_argument("--train_model", "-t", type=str, default="train_model", help="train_model")
-    parser.add_argument("--checkpoint", "-c", type=str, default="./save_model/last.pt")
+    parser.add_argument("--checkpoint", "-c", type=str, default="./Save_model/last.pt")
     args = parser.parse_args()
     return args
 
@@ -114,10 +111,10 @@ def Train():
             'arcface_state_dict': arcface.state_dict(),
             'accuracy' : accuracy
         }
-        torch.save(checkpoint, os.path.join('save_model', 'last.pt'))
+        torch.save(checkpoint, os.path.join('Save_model', 'last.pt'))
         if accuracy > max:
             max= accuracy
-            torch.save(checkpoint, os.path.join('save_model', 'best.pt'))
+            torch.save(checkpoint, os.path.join('Save_model', 'best.pt'))
 
 
 if __name__ == '__main__':

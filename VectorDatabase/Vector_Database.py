@@ -2,8 +2,7 @@ import os
 import cv2
 import faiss
 import torch
-import torch.nn as nn
-from MultiRegionModel import EnhancedMultiRegionModel
+from BuildModel.MultiRegionModel import EnhancedMultiRegionModel
 from torchvision.transforms import Compose, ToTensor, Resize, Normalize
 from scrfd import SCRFD, Threshold
 from PIL import Image
@@ -11,12 +10,12 @@ import pickle
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Khởi tạo face detector
-face_detector = SCRFD.from_path("Scrfd/scrfd.onnx")
+face_detector = SCRFD.from_path("../Scrfd/scrfd.onnx")
 threshold = Threshold(probability=0.4)
 
 def Vector_Database(root: str) -> None:
     model = EnhancedMultiRegionModel().to(device)
-    checkpoint = torch.load('save_model/last.pt', map_location=device)
+    checkpoint = torch.load('../Save_model/last.pt', map_location=device)
     model.load_state_dict(checkpoint['state_dict'])
     print(f"Model accuracy: {checkpoint['accuracy']}")
     model.eval()
