@@ -65,7 +65,7 @@ def Train():
     model.load_state_dict(checkpoint['state_dict'])
     arcface.load_state_dict(checkpoint['arcface_state_dict'])
     loss_function = nn.CrossEntropyLoss()
-    optimizer = Adam(model.parameters(), lr=1e-4)
+    optimizer = Adam(model.parameters(), lr=1e-4/2)
     optimizer.load_state_dict(checkpoint['optimizer'])
     epochs = arg.epoch
     max = 0
