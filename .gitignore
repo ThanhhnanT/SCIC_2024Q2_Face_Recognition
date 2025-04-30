@@ -2,3 +2,5 @@ Save_model/
 img_align_celeba/
 Dataset/
 AFDB_masked_face_dataset/
+dataset/
+checkpoint/
