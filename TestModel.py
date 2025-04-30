@@ -14,7 +14,7 @@ threshold = Threshold(probability=0.4)
 # Kiểm tra phiên bản Faiss
 print(faiss.__version__)
 
-index = faiss.read_index("face_index.faiss")  # Sử dụng Inner Product cho cosine similarity
+index = faiss.read_index("VectorDatabase/face_index.faiss")  # Sử dụng Inner Product cho cosine similarity
 with open("VectorDatabase/face_labels.pkl", "rb") as f:
     name = pickle.load(f)
 # Khởi tạo webcam
